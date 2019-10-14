@@ -11,7 +11,7 @@ import {
   selector: '[appBetterHighlight]'
 })
 export class BetterHighlightDirective implements OnInit {
-  @HostBinding('style.backgroundColor') backgroundColor: string = 'inherit';
+  @HostBinding('style.backgroundColor') backgroundColor = 'inherit';
 
   constructor(private elRef: ElementRef, private renderer: Renderer2) {
   }
