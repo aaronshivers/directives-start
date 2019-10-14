@@ -2,7 +2,7 @@ import {
   Directive,
   ElementRef,
   HostBinding,
-  HostListener,
+  HostListener, Input,
   OnInit,
   Renderer2
 } from '@angular/core';
@@ -11,22 +11,25 @@ import {
   selector: '[appBetterHighlight]'
 })
 export class BetterHighlightDirective implements OnInit {
-  @HostBinding('style.backgroundColor') backgroundColor = 'inherit';
+  @Input() defaultColor = 'inherit';
+  @Input('appBetterHighlight') highlightColor = 'cornflowerBlue';
+  @HostBinding('style.backgroundColor') backgroundColor;
 
   constructor(private elRef: ElementRef, private renderer: Renderer2) {
   }
 
   @HostListener('mouseenter') mouseover(eventData: Event) {
     // this.renderer.setStyle(this.elRef.nativeElement, 'background-color', 'cornflowerBlue');
-    this.backgroundColor = 'cornflowerBlue';
+    this.backgroundColor = this.highlightColor;
   }
 
   @HostListener('mouseleave') mouseleave(eventData: Event) {
     // this.renderer.setStyle(this.elRef.nativeElement, 'background-color', 'inherit');
-    this.backgroundColor = 'transparent';
+    this.backgroundColor = this.defaultColor;
   }
 
   ngOnInit(): void {
+    this.backgroundColor = this.defaultColor;
     // this.renderer.setStyle(this.elRef.nativeElement, 'background-color', 'cornflowerBlue');
   }
 }
